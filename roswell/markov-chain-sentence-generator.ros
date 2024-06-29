@@ -1,0 +1,29 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+
+#|
+ This file is a part of markov-chain-sentence-generator
+ (c) 2024 chu the pup https://dogboner.xyz (chufilthymutt@gmail.com)
+ Author: chu the pup <chufilthymutt@gmail.com>
+|#
+
+;; Use `+Q`  if you don't have Quicklisp dependencies to save startup time.
+
+(defun help ()
+  (format T "~&Usage:
+
+  markov-chain-sentence-generator [name]
+"))
+
+;; XXX: this load does not load from everywhere
+;; It doesn't work when run as a script.
+(load (truename "markov-chain-sentence-generator.asd"))
+(ql:quickload "markov-chain-sentence-generator")
+
+(defun main (&rest argv)
+  "Optional name parameter."
+  ;; CLI args parsing is done in %main.
+  (markov-chain-sentence-generator::%main argv))
